@@ -36,7 +36,6 @@ import NetworkTransactionFees, { NetworkTransactionFeeType } from './models/netw
 import Biometric from './class/biometrics';
 import { encodeUR } from 'bc-ur/dist';
 import QRCode from 'react-native-qrcode-svg';
-import Slider from '@react-native-community/slider';
 const loc = require('./loc/');
 /** @type {AppStorage} */
 const BlueApp = require('./BlueApp');
@@ -2543,7 +2542,6 @@ export class DynamicQRCode extends Component {
       intervalHandler: null,
     };
     this.QRCodeMaxSize = height > width ? width - 40 : width / 3;
-    this.QRCodeMinSize = this.QRCodeMaxSize / 2;
   }
 
   fragments = [];
@@ -2643,18 +2641,6 @@ export class DynamicQRCode extends Component {
           </TouchableOpacity>
         </View>
         <BlueSpacing20 />
-        <Slider
-          style={{ width: 200 }}
-          value={this.state.qrCodeHeight}
-          maximumValue={this.QRCodeMaxSize}
-          minimumValue={this.QRCodeMinSize}
-          onValueChange={value => {
-            this.setState(state => ({
-              qrCodeHeight: value,
-            }));
-          }}
-        />
-        <BlueSpacing20 />
         <BlueButton onPress={this.props.onDone} title="Done" />
       </View>
     ) : (
@@ -2680,7 +2666,7 @@ const animatedQRCodeStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: BlueApp.settings.buttonBackgroundColor,
+    backgroundColor: '#ccddf9',
     borderRadius: 25,
     height: 45,
     paddingHorizontal: 18,
