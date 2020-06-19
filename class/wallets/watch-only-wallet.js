@@ -153,7 +153,7 @@ export class WatchOnlyWallet extends LegacyWallet {
    * @see HDSegwitBech32Wallet.createTransaction
    */
   createTransaction(utxos, targets, feeRate, changeAddress, sequence) {
-    if (this._hdWalletInstance instanceof HDSegwitBech32Wallet) {
+    if (this._hdWalletInstance instanceof HDSegwitBech32Wallet || this._hdWalletInstance instanceof HDSegwitP2SHWallet) {
       return this._hdWalletInstance.createTransaction(utxos, targets, feeRate, changeAddress, sequence, true, this.getMasterFingerprint());
     } else {
       throw new Error('Not a zpub watch-only wallet, cant create PSBT (or just not initialized)');

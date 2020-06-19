@@ -211,6 +211,13 @@ export default class WalletDetails extends Component {
     });
   };
 
+  showHWWalletOptions() {
+    return (
+      this.state.wallet.type === WatchOnlyWallet.type &&
+      (this.state.wallet.getSecret().startsWith('zpub') || this.state.wallet.getSecret().startsWith('ypub'))
+    );
+  }
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -272,7 +279,7 @@ export default class WalletDetails extends Component {
                 )}
                 <View>
                   <BlueSpacing20 />
-                  {this.state.wallet.type === WatchOnlyWallet.type && this.state.wallet.getSecret().startsWith('zpub') && (
+                  {this.showHWWalletOptions() && (
                     <>
                       <Text style={styles.textLabel2}>{loc.wallets.details.advanced.toLowerCase()}</Text>
                       <View style={styles.hardware}>

@@ -666,6 +666,13 @@ export default class WalletTransactions extends Component {
     }
   };
 
+  showHWWalletOptions() {
+    return (
+      this.state.wallet.type === WatchOnlyWallet.type &&
+      (this.state.wallet.getSecret().startsWith('zpub') || this.state.wallet.getSecret().startsWith('ypub'))
+    );
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -773,12 +780,7 @@ export default class WalletTransactions extends Component {
           })()}
 
           {(() => {
-            if (
-              this.state.wallet.allowSend() ||
-              (this.state.wallet.type === WatchOnlyWallet.type &&
-                this.state.wallet.isHd() &&
-                this.state.wallet.getSecret().startsWith('zpub'))
-            ) {
+            if (this.state.wallet.allowSend() || this.showHWWalletOptions()) {
               return (
                 <BlueSendButtonIcon
                   onLongPress={this.sendButtonLongPress}
